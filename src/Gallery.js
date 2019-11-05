@@ -40,7 +40,6 @@ import { width } from "@material-ui/system";
  * @return {Boolean}
  */
 function imagesLoaded(parentNode) {
-  debugger;
   const imgElements = [...parentNode.querySelectorAll("img")];
   for (let i = 0; i < imgElements.length; i += 1) {
     const img = imgElements[i];
@@ -73,14 +72,14 @@ class Gallery extends React.Component {
   }
 
   handleImageChange = () => {
-    debugger;
+   // 
     this.setState({
       loading: !imagesLoaded(this.galleryElement)
     });
   };
 
   handleimageUpload= () => {
-    debugger;
+    //
     /*this.setState({
       loading: !imagesLoaded(this.galleryElement)
     });*/
@@ -92,7 +91,7 @@ class Gallery extends React.Component {
     this.fileSelector.click();
   }
   OnGalaryImageClick =(item) =>{
-    debugger;
+    //
     this.props.SAVE_SELECTED_IMG_ID_Action(item.id.toString());
    this.handleOpenDialog();
 
@@ -110,7 +109,7 @@ handleCloseDialog = () => {
 };
   handleChange(e,selectorFiles)
     {
-        debugger;
+        //
         this.setState({
             imgExt: e.target.files[0]
         })
@@ -132,7 +131,7 @@ handleCloseDialog = () => {
 
     _handleImageChange(e) {
         e.preventDefault();
-    debugger;
+    //
         let reader = new FileReader();
         let file = e.target.files[0];
     let filename = e.target.files[0].name;
@@ -150,7 +149,7 @@ handleCloseDialog = () => {
       }
       
       _handleSubmit(e) {
-          debugger;
+         // 
         e.preventDefault();
         const{file,filename, imagePreviewUrl,x1,y1,x2,y2 } = this.state;
         const{imageData} = this.props;
@@ -171,7 +170,7 @@ handleCloseDialog = () => {
               },
               
           }
-            debugger;
+           // 
             this.props.UPLOADIMAGEFILEAction(userdata);
         }
         else
@@ -184,15 +183,21 @@ handleCloseDialog = () => {
       
 
       handleTag=e=>{
-        debugger;
+        //
         const {name,value} = e.target;
        this.setState({
            [name]:value
           });
         }
 
+        handleSaveTag=e=>{
+          
+          this.props.UPLOADIMAGEANNOTAIONAction(e);
+          }
+  
+
       onHandleChange=e=>{
-        debugger;
+        //
         const {name,value} = e.target;
        this.setState({
            [name]:value
@@ -212,8 +217,8 @@ handleCloseDialog = () => {
       <div key={item.id}>
         <img key={item.id}
           src={item.url}
-         // onLoad={this.handleImageChange}
-          //onError={this.handleImageChange}
+          onLoad={this.handleImageChange}
+          onError={this.handleImageChange}
           //onClick={this.OnGalaryImageClick(this,item)}
           onClick={()=>this.OnGalaryImageClick(item)}
         />
@@ -222,7 +227,7 @@ handleCloseDialog = () => {
   }
 
   render() {
-    debugger;
+    //
     const{imageData} = this.props;
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;
@@ -231,7 +236,7 @@ handleCloseDialog = () => {
       } else {
         $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
       }
-      //debugger;
+      //
     return (
       <div
         className="gallery"
@@ -243,14 +248,7 @@ handleCloseDialog = () => {
         <div className="images">
           { imageData.map(item => this.renderImage(item))}
         </div>
-        {/*<div className="">
-            
-            <FileDialogue />
-    </div>*
-            <div>
-            <input type="file" onChange={ (e) => this.handleChange(e,e.target.files) } />
-    </div>*/}
-
+       
         <div className="previewComponent">
         <form onSubmit={(e)=>this._handleSubmit(e)}>
           <input className="fileInput" 
@@ -332,11 +330,11 @@ handleCloseDialog = () => {
                     onClose={this.handleCloseDialog} fullScreen >
                 <DialogContent>
                   <div>
-                <Canvas   handleTag={this.handleTag}/>
+                <Canvas handleCloseDialog={this.handleCloseDialog}  handleTag={this.handleSaveTag}/>
                 </div>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={this.handleCloseDialog} color="primary">
+                    {/*<Button onClick={this.handleCloseDialog} color="primary">
                     Close
                     </Button>
                     <Button
@@ -345,7 +343,7 @@ handleCloseDialog = () => {
                     autoFocus
                     >
                     Tag
-                    </Button>
+      </Button>*/}
                 </DialogActions>
             </Dialog>
 </div>
@@ -359,7 +357,7 @@ handleCloseDialog = () => {
 };*/
 
 const mapStateToProps = (state,ownProps) => {
-  debugger;
+  //
 const { imageData , TimeStamep } = state;
 return {
   imageData,

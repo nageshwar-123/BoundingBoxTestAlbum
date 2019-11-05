@@ -49,41 +49,42 @@ const initialState = {
 };
 
 const UPLOAD_IMAGE_FILE_SUCESS = (state, action) => {    
-  debugger;
+ //
   
   const { model } = action;
    const{imageData}= state;
    imageData.push(model.fileinfo)
   //annotation.push(payload.annotation);
    //index = payload.fileinfo.id;
-   debugger;
+   //
   return {
     ...state,
     TimeStamep: new Date().getTime().toString(),
   };
  };
  const UPLOAD_IMAGE_ANITAION_SUCESS = (state, action) => {    
-  debugger; 
+  // 
   const { payload } = action;
-   const{imageData, index}= state;
+   const{imageData}= state;
    if(imageData && imageData.length > 0 && payload.fileinfo)
    {
     if(imageData != null && imageData.length > 0)
     {
       let idx = 0;
       (imageData).forEach(e => {
-        
+        // 
         if(e.id != null && e.id ==  payload.fileinfo.id)
         {
-          imageData[idx] = payload.fileinfo;     
-            
+         // imageData[idx] = payload.fileinfo;     
+         e = payload.fileinfo; 
+          // 
           return;
         };
         idx ++;
       });
     }
    }
-   debugger;
+   //
    return {
        ...state,
        TimeStamep: new Date().getTime().toString(),      
@@ -91,7 +92,7 @@ const UPLOAD_IMAGE_FILE_SUCESS = (state, action) => {
  };
 
  const SAVE_SELECTED_IMG_ID_Action_SUCESS = (state, action) => {    
-  debugger; 
+  // 
   //const{model} = action;
  // let {CurrentSelectedID } = state;
   //CurrentSelectedID = model;
@@ -106,7 +107,7 @@ const UPLOAD_IMAGE_FILE_SUCESS = (state, action) => {
  export function TaskReducer(state = initialState, action) {
   switch (action.type) {
     case TaskConstants.UPDATE_NAME_START:
-      debugger;
+     // 
       const imageArray = state.imageData.forEach(o => {
         if (o.id === action.model.id) {
           o.name = action.model.name;
@@ -117,10 +118,10 @@ const UPLOAD_IMAGE_FILE_SUCESS = (state, action) => {
         loading: true
       };
       case TaskConstants.UPLOAD_IMAGE_FILE_SUCESS:
-          debugger;
+         // 
           return UPLOAD_IMAGE_FILE_SUCESS(state, action);
           case TaskConstants.UPLOAD_IMAGE_ANITAION_SUCESS:
-              debugger;
+            //  
               return  UPLOAD_IMAGE_ANITAION_SUCESS(state, action);
           case TaskConstants.SAVE_SELECTED_IMG_ID :
               return  SAVE_SELECTED_IMG_ID_Action_SUCESS(state, action);
@@ -132,7 +133,7 @@ const UPLOAD_IMAGE_FILE_SUCESS = (state, action) => {
  /*export default  TaskReducer = (state = initialState, action) => {
   switch (action.type) {
     case TaskConstants.UPDATE_NAME_START:
-      debugger;
+      
       const imageArray = state.imageData.forEach(o => {
         if (o.id === action.model.id) {
           o.name = action.model.name;
